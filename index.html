@@ -1,168 +1,273 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 
 <head>
   <meta charset="UTF-8">
-  <title>GIFT BOX - Mila</title>
+  <title>Happy Birthday 💌</title>
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
-    * {
+    html,
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    body {
-      background: linear-gradient(135deg, #001f3f, #0074D9);
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      color: #fff;
-    }
-
-    .gift-container {
-      position: relative;
-      width: 220px;
-      height: 220px;
-      cursor: pointer;
-      transition: transform 0.5s ease;
-      text-align: center;
-    }
-
-    .gift-box {
       width: 100%;
-      height: 100%;
-      background: #2980b9;
-      border-radius: 10px;
-      position: relative;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      overflow-x: hidden;
     }
 
-    .gift-lid {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      width: 100%;
-      height: 40px;
-      background: #3498db;
-      border-radius: 10px 10px 0 0;
-      transition: transform 0.7s ease;
-      transform-origin: bottom;
-    }
-
-    .gift-ribbon {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30px;
-      height: 100%;
-      background: #1abc9c;
-    }
-
-    .gift-open .gift-lid {
-      transform: rotateX(150deg);
-    }
-
-    .gift-text {
-      margin-top: 15px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #f1f1f1;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-    }
-
-    .video-container {
-      display: none;
+    /* WRAPPER */
+    .bg-wrap {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      max-width: 800px;
-      max-height: 80vh;
-      background: #000;
-      border: 4px solid #1abc9c;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+      inset: 0;
+      z-index: -1;
       overflow: hidden;
+    }
+
+    /* GAMBAR */
+    .parallax {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: auto;
+      height: 130vh;
+      object-fit: cover;
+      filter: brightness(0.7);
+      will-change: transform;
+    }
+
+    /* OPEN CARD */
+    .open {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffd6e8;
       z-index: 10;
     }
 
-    .video-container video {
-      width: 100%;
-      height: auto;
-      max-height: 80vh;
-      display: block;
+    .open button {
+      padding: 20px 45px;
+      border: none;
+      border-radius: 40px;
+      font-size: 18px;
+      background: #ff6b9d;
+      color: white;
+      cursor: pointer;
     }
 
-    .letter-container {
-      display: none;
-      position: fixed;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 600px;
-      height: 70%;
-      background: rgba(255, 255, 255, 0.95);
-      color: #000;
-      border-radius: 15px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
-      padding: 20px;
-      overflow-y: auto;
-      z-index: 20;
-      animation: fadeIn 1s ease forwards;
+    /* CARD */
+    .card {
+      background: white;
+      max-width: 760px;
+      margin: 60px auto;
+      padding: 35px;
+      border-radius: 25px;
     }
 
-    .letter-container h2 {
+    h1 {
       text-align: center;
-      margin-bottom: 15px;
-      color: #0074D9;
+      color: #ff6b9d;
     }
 
-    .letter-container p {
-      line-height: 1.6;
-      margin-bottom: 10px;
+    p {
+      line-height: 1.9;
+      color: #444;
+      margin-bottom: 18px;
     }
 
-    @keyframes fadeIn {
+    .ps {
+      font-style: italic;
+      color: #777;
+    }
+
+    .end-photo {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .end-photo img {
+      width: 400px;
+      max-width: 100%;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+      animation: fadeUp 1.8s ease forwards;
+    }
+
+    .img-desc {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      font-style: italic;
+    }
+
+    @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translate(-50%, -10%);
+        transform: translateY(20px) scale(0.95);
       }
 
       to {
         opacity: 1;
-        transform: translate(-50%, 0);
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* MUSIC BUTTON */
+    .music {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff6b9d;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .love {
+      position: fixed;
+      bottom: -40px;
+      font-size: 24px;
+      max-width: 100vw;
+      overflow: hidden;
+      animation: floatUp linear forwards;
+      pointer-events: none;
+    }
+
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .bg {
+        background-image:
+          linear-gradient(rgba(0, 0, 0, .45), rgba(0, 0, 0, .45)),
+          url("bg.png");
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="gift-container" id="gift">
-    <div class="gift-box"></div>
-    <div class="gift-lid"></div>
-    <div class="gift-ribbon"></div>
-    <div class="gift-text">This is your Present bebe🙋🏻‍♀️</div>
+
+  <div class="bg-wrap">
+    <img src="bg.png" class="parallax" alt="">
+  </div>
+
+  <!-- MUSIC -->
+  <audio id="bg-music" loop>
+    <source src="one-only.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- OPEN -->
+  <div class="open" id="open">
+    <button onclick="openCard()">💌 Open Card</button>
+  </div>
+
+  <!-- CARD -->
+  <div class="card" id="card">
+    <h1>Happy Birthday, my favorite person💌</h1>
+    <div class="end-photo">
+      <img src="image1.png" alt="Love Photo">
+    </div>
+    <p class="img-desc">Our first time at photobooth 𐔌՞ ܸ.ˬ.ܸ՞𐦯</p>
+
+    <p>Hai bebe🙋🏻‍♀️, Today is not just the day you were born, but the day the world was blessed with someone as kind,
+      strong, and wonderful as you &lt;(˶ᵔᵕᵔ˶)&gt;. I’m so grateful to have you in my life („• ֊ •„). You make my days
+      brighter, my heart calmer, and my smile wider just by being yourself ◝(ᵔᵕᵔ)◜.</p>
+
+    <p>Thank you for loving me in ways I never knew I needed, for being patient with me, and for always trying your
+      best, even when things are hard (˶˃ ᵕ ˂˶). I’m so proud of the person you are and the person you’re becoming (
+      ˶ˆᗜˆ˵ ).</p>
+
+    <p>I hope this new year of your life brings you happiness, success, good health, and everything your heart has been
+      wishing for. May all your dreams slowly turn into reality (˶ ᵔ ̫ ᵔ ˶). Remember that you are never alone, because
+      you have me, always. ദ്ദി◝ ⩊ ◜.ᐟ</p>
+
+    <p>Once again, happy birthday, my favorite person. I love you more than words can ever explain ૮₍´｡ᵔ ꈊ ᵔ｡₎ა .</p>
+
+    <p class="ps">PS : Hehehe i tau pasti u pusing bacanya karena pakai bahasa inggis (˵¬ᴗ¬˵) dibawah ini versi
+      indonesianya yaa beb, biar u ga buka google translate buat pahamin kata-kata i (≖⩊≖)</p>
+
+    <p>Hai bebe, hari ini bukan cuma hari lahir u, tapi hari di mana dunia diberkahi sama hadirnya seseorang yang sangat
+      baik, kuat, dan luar biasa kaya u &lt;(˶ᵔᵕᵔ˶)&gt;. i bersyukur banget bisa milikin u dihidup i („• ֊ •„).</p>
+
+    <p>Terima kasih karena sudah mencintai i dengan cara yang bahkan ga pernah i sadarin i butuhin, karena selalu sabar
+      sama i, dan karena selalu berusaha jadi yang terbaik, meskipun keadaan lagi sulit (˶˃ ᵕ ˂˶).</p>
+
+    <p>I harap tahun baru dalam hidup u ini bisa membawa kebahagiaan, kesuksesan, kesehatan, dan semua hal yang selama
+      ini u harapkan (˶ ᵔ ̫ ᵔ ˶). Semoga semua mimpi u perlahan jadi kenyataan. Inget yaa beb u ga pernah sendirian,
+      karena u selalu punya i.</p>
+
+    <p>Sekali lagi, selamat ulang tahun buat orang favorit i. I love you lebih dari apa pun yang bisa dijelaskan pakai
+      kata-kata ૮₍´｡ᵔ ꈊ ᵔ｡₎ა .</p>
   </div>
 
   <script>
-    const gift = document.getElementById('gift');
+    function openCard() {
+      document.getElementById("open").style.display = "none";
+      document.getElementById("card").style.display = "block";
+    }
 
-    gift.addEventListener('click', () => {
-      gift.classList.add('gift-open');
-      setTimeout(() => {
-        window.location.href = "Surprise.html";
-      }, 800);
-    });
+    const music = document.getElementById("bg-music");
+    music.volume = 0.35;
+    music.muted = true;
+    music.play();
 
-    memoryVideo.addEventListener('ended', () => {
-      videoBox.style.display = 'none';
-      letterBox.style.display = 'block';
+    function enableSound() {
+      music.muted = false;
+      music.play();
+      document.removeEventListener("click", enableSound);
+      document.removeEventListener("scroll", enableSound);
+    }
+
+    document.addEventListener("click", enableSound);
+    document.addEventListener("scroll", enableSound);
+
+    const loveAssets = [
+      { type: "emoji", value: "💗" },
+      { type: "emoji", value: "💖" }
+
+    ];
+
+    setInterval(() => {
+      let l = document.createElement("div");
+      l.className = "love";
+
+      const random = loveAssets[Math.floor(Math.random() * loveAssets.length)];
+
+      if (random.type === "emoji") {
+        l.innerHTML = random.value;
+      }
+
+      l.style.left = Math.random() * 95 + "vw";
+      l.style.animationDuration = (Math.random() * 3 + 4) + "s";
+
+      document.body.appendChild(l);
+      setTimeout(() => l.remove(), 7000);
+    }, 300);
+
+    const bg = document.querySelector(".parallax");
+
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      bg.style.transform =
+        `translateX(-50%) translateY(${scrollY * 0.25}px)`;
     });
   </script>
 
